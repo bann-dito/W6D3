@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         # user = User.new(params.permit(:name, :email))
         # user.save!
         # render json: user
-        user = User.new(params.require(:user).permit(:name, :email))
+        user = User.new(params.require(:user).permit(:username))
         if user.save
             render json: user
         else
@@ -25,13 +25,16 @@ class UsersController < ApplicationController
 
     def update
         user = User.find(params[:id])
-        user.update!(params.permit(:name, :email))
-        redirect_to index
+        if user.update!(params.permit(:username))
+            render json: user
+        else 
+            render json: user.erros.full_messages, status: :unprocessable_entity
+        end
     end
 
     def destroy
         user = User.find(params[:id])
         user.destroy
-        redirect_to index
+        redirect_to users_url
     end
 end
