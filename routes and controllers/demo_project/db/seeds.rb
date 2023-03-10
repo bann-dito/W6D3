@@ -36,6 +36,11 @@ ApplicationRecord.transaction do
     ArtworkShare.create!(artwork_id: a4.id, viewer_id: u3.id)
     ArtworkShare.create!(artwork_id: a5.id, viewer_id: u1.id)
     ArtworkShare.create!(artwork_id: a1.id, viewer_id: u2.id)
+
+    Comment.create!(body: "Nice!", author_id: u4.id, artwork_id: a1.id)
+    Comment.create!(body: "bump", author_id: u1.id, artwork_id: a1.id)
+    Comment.create!(body: "Cool!", author_id: u4.id, artwork_id: a2.id )
+    Comment.create!(body: "What is this?", author_id: u3.id, artwork_id: a5.id)
   
     puts 'Done!'
   end

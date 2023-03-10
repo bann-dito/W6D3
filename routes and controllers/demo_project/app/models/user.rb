@@ -23,4 +23,16 @@ class User < ApplicationRecord
     has_many :shared_artworks,
         through: :artworks_viewed,
         source: :artwork
+
+    has_many :comments,
+    foreign_key: :author_id,
+    class_name: :Comment,
+    dependent: :destroy
+
+    # def self.search_for_user_id(params) #/users/G
+    #     User
+    #         .select('*')
+    #         .joins(:shared_viewers)
+    #         .where('artist_id = (?) OR viewer_id = (?)', user_id, user_id)
+    # end
 end
